@@ -1,0 +1,14 @@
+.navbar{
+	
+	//**box-shadow: 0 0 10px 0 hsla(0,0%,40%,.9);
+	z-index: 10;**/
+	margin:0 0 0 0;
+	background-color: #fff;
+	background-image: url(../images/header-bg.png);
+	/**border-top: 4px solid #0c261b;
+	margin-left: -8px;
+	margin-right: -8px;*/
+	background-color: #184d36;
+	color: #fff;
+	/*padding: 12px 18px**/
+}

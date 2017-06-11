@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <title>澳門長者服務</title>
+
+  <!-- Path to Framework7 Library CSS-->
+  <link rel="stylesheet" href="css/framework7.ios.min.css">
+  <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
+
+  <link rel="stylesheet" href="styles/vendor.css">
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- Path to your custom app styles-->
+  <link rel="stylesheet" href="css/my-app.css">
+
+
+  <style type="text/css">
+    body,
+    html {
+      font-size: 20px;
+    }
+
+    .navbar {
+
+
+      margin: 0 0 0 0;
+      background-color: #fff;
+      background-image: url(../images/header-bg.png);
+
+      background-color: #184d36;
+      color: #fff;
+    }
+
+    .page,
+    .pages {
+      font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+      font-size: 20px;
+      line-height: 1.428571429;
+      color: #333;
+      background-color: #fffded
+    }
+
+    .swiper-slide {
+      background: #fff;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      line-height: 120px;
+      text-align: center;
+    }
+
+    .swiper-slide span {
+      font-size: 17px;
+    }
+
+    .swiper-container {
+      height: 120px;
+      margin: 0px 0 35px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Views-->
+  <div class="views">
+
+    <!-- Your main view, should have "view-main" class-->
+    <div class="view view-main content">
+      <div>
+        <div class="navbar">
+          <div class="navbar-inner">
+
+            <div class="center sliding">
+              <h1 class="header__bar__title">澳門長者服務手機應用程式</h1>
+            </div>
+
+          </div>
+
+        </div>
+
+        <section class="section section--full">
+          <div class="search">
+            <div class="input-group stylish-input-group"><input type="text" class="form-control" placeholder="搜尋資料"> <span class="input-group-addon"><button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button></span></div>
+          </div>
+        </section>
+      </div>
+      <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
+      <!--div class="pages navbar-through toolbar-through">
+	  <!-- Page, data-page contains page name
+        <div data-page="index" class="page">
+		
+		</div>
+	  
+	  </div>-->
+      <div class="pages navbar-through toolbar-through">
+        <script id="homeTemplate" type="text/template7">
+          <div></div>
+          <div data-page="index" class="page">
+            <!--div class="page-content"-->
+            <div class="swiper-container swiper-1">
+              <div class="swiper-pagination"></div>
+              <div class="swiper-wrapper">
+
+                <!--div class="swiper-slide"><span>Slide 2</span></div>
+				<div class="swiper-slide"><span>Slide 3</span></div-->
+				
+                {{#each people}}
+
+                <div class="swiper-slide"><span>{{firstName}} {{lastName}}</span></div>
+
+                {{/each}}
+
+              </div>
+            </div>
+
+
+            <div class="icon-menu">
+              <div class="section section--service section--icon">
+                <a href="about.html" class="item-link">
+                  <div class="section__thumb section__thumb--icon"></div>
+                  <h2 class="section__heading section__heading--icon">服務</h2>
+                </a>
+              </div>
+
+              <div class="section section--benefits section--icon">
+                <a href="aoindex.html">
+                  <div class="section__thumb section__thumb--icon"></div>
+                  <h2 class="section__heading section__heading--icon">優惠</h2>
+                </a>
+              </div>
+              <div class="section section--news section--icon">
+                <a href="single.html">
+                  <div class="section__thumb section__thumb--icon"></div>
+                  <h2 class="section__heading section__heading--icon">新聞</h2>
+                </a>
+              </div>
+              <div class="section section--learning section--icon">
+                <a href="single.html">
+                  <div class="section__thumb section__thumb--icon"></div>
+                  <h2 class="section__heading section__heading--icon">學習</h2>
+                </a>
+              </div>
+              <div class="section section--event section--icon">
+                <a href="category.html">
+                  <div class="section__thumb section__thumb--icon"></div>
+                  <h2 class="section__heading section__heading--icon">活動</h2>
+                </a>
+              </div>
+              <div class="section section--advisory section--icon">
+                <a href="category.html">
+                  <div class="section__thumb section__thumb--icon"></div>
+                  <h2 class="section__heading section__heading--icon">其他資訊</h2>
+                </a>
+              </div>
+            </div>
+            <!--/div-->
+            <div><button class="b1">发送一个 HTTP GET 请求并获取返回结果</button></div>
+            <div class="d1">divdf</div>
+          </div>
+        </script>
+      </div>
+
+
+      <!-- Bottom Tabbar-->
+      <div class="toolbar tabbar tabbar-labels">
+        <div class="toolbar-inner">
+
+          <div class="menu__list__item active">
+            <a href="newindex.html">
+              <div class="menu__list__item__icon"><i class="fa fa-home" aria-hidden="true"></i></div>
+              <div class="menu__list__item__text">首頁</div>
+            </a>
+          </div>
+          <div class="menu__list__item">
+            <a href="book1.html">
+              <div class="menu__list__item__icon"><i class="fa fa-star" aria-hidden="true"></i></div>
+              <div class="menu__list__item__text">收藏</div>
+            </a>
+          </div>
+
+          <div class="menu__list__item">
+            <a href="setting.html">
+              <div class="menu__list__item__icon"><i class="fa fa-cog" aria-hidden="true"></i></div>
+              <div class="menu__list__item__text">設定</div>
+            </a>
+          </div>
+          <div class="menu__list__item">
+            <a href="con1.html">
+              <div class="menu__list__item__icon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+              <div class="menu__list__item__text">聯絡</div>
+            </a>
+          </div>
+          <div class="menu__list__item">
+            <a href="enquiry.html">
+              <div class="menu__list__item__icon"><i class="fa fa-commenting" aria-hidden="true"></i></div>
+              <div class="menu__list__item__text">意見</div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Path to Framework7 Library JS-->
+  <script type="text/javascript" src="js/framework7.min.js"></script>
+  <!--Path to your app js
+  <script type="text/javascript" src="js/my-app.js"></script>-->
+
+  <script>
+    // 声明Dom7
+    
+    // 初始化 App
+    var myApp = new Framework7({
+	  cache: false,
+      precompileTemplates: true
+    }
+    );
+    var mainView = myApp.addView('.view-main');
+
+    //var mySwiper1 = myApp.swiper('.swiper-1', {
+    //pagination:'.swiper-1 .swiper-pagination',
+    //spaceBetween: 20
+    //});
+	var $$ = Dom7;
+    
+	
+	//$$('.something').on('click', function (e) {
+   // $$(this).addClass('hello').attr('title', 'world').insertAfter('.something-else');
+//});
+   // $$('button').on('click', function (e) {
+     // $$.get("http://localhost/AgeingAppDev-master/public/news", function (data) {
+        //alert("数据: " + data + "\n状态: " + status);
+     //   $$('.d1').html(data)
+     // });
+	//   $$('.d1').hide;
+	   //myApp.addNotification({
+        //      title: 'Framework7',
+       //       message: '这是一个包含标题和消息内容的简单通知'
+        //  });
+		  
+  //  });
+	$$.get('http://localhost/AgeingAppDev-master/public/news',function(date){
+		$$('.d1').html(date);
+	});
+    // Now we may render our compiled template by passing required context
+    var context = {
+      people: [
+        {
+          firstName: 'John',
+          lastName: 'Doe'
+        }
+        ,
+        {
+          firstName: 'Mark',
+          lastName: 'Johnson'
+        }
+        ,
+      ]
+    }
+      ;
+    mainView.router.load({
+      template: Template7.templates.homeTemplate,
+      context: context
+	  //$$.get('http://localhost/AgeingAppDev-master/public/news',function(date){
+		//$$('.d1').html(date);
+	//});
+    });
+
+    var mySwiper1 = myApp.swiper('.swiper-1', {
+      pagination: '.swiper-1 .swiper-pagination',
+      spaceBetween: 20
+    });
+  </script>
+
+
+  <!--script>
+  var $$ = Dom7;
+			// 初始化 App
+			var myApp = new Framework7({
+				precompileTemplates: true
+			}
+									  );
+			var mainView = myApp.addView('.view-main');
+			
+			var mySwiper1 = myApp.swiper('.swiper-1', {
+        pagination:'.swiper-1 .swiper-pagination',
+        spaceBetween: 20
+      });
+			// Now we may render our compiled template by passing required context
+			var context = {
+				people : [
+					{
+						firstName: 'John',
+						lastName: 'Doe'
+					}
+					,
+					{
+						firstName: 'Mark',
+						lastName: 'Johnson'
+					}
+					,
+				]
+			}
+			;
+			mainView.router.load({
+				template: Template7.templates.homeTemplate,
+				context: context
+			}
+								)
+  </script-->
+</body>

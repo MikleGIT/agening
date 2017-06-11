@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<title>Template7 实例教程
+		</title>
+		<link rel="stylesheet" href="css/framework7.ios.min.css">
+        <link rel="stylesheet" href="css/framework7.ios.colors.min.css">
+	</head>
+	<body>
+		<div class="views">
+			<div class="view view-main">
+			
+			 <div class="navbar">
+
+        <div class="navbar-inner">
+
+          <!-- We have home navbar without left link-->
+          <div class="center sliding">
+            <h1 class="header__bar__title">澳門長者服務手機應用程式</h1>
+          </div>
+          <!--div class="right"-->
+          <!-- Right link contains only icon - additional "icon-only" class-->
+          <!--a href="#" class="link icon-only open-panel"> <i class="icon icon-bars"></i></a>
+            </div-->
+
+        </div>
+      </div>
+			
+				<div class="pages">
+					<!--script id="homeTemplate" type="text/template7">
+					<div></div-->
+						<div data-page="home" class="page">
+							<div class="page-content">
+							
+							<div class="swiper-container swiper-1">
+							<div class="swiper-pagination"></div>
+				
+                            <div class="swiper-wrapper">
+							
+							
+						<div class="swiper-slide"><span>1</span></div>
+						<div class="swiper-slide"><span>2</span></div>
+						<!--	{{#each people}}
+									
+							<div class="swiper-slide"><span>{{firstName}} {{lastName}}</span></div>
+						    {{/each}}    
+							-->
+							
+							</div>
+							</div>
+							
+							
+						
+						</div>
+						</div>	
+					<!--/script-->
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="../js/framework7.min.js">
+		</script>
+		
+		<style>
+      .swiper-slide {
+        background: #fff;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        line-height:120px;
+        text-align:center;
+      }
+      .swiper-slide span {
+        font-size:17px;
+      }
+      .swiper-container {
+        height: 120px;
+        margin: 0px 0 35px;
+      }
+    </style>
+		<script>// 声明Dom7
+			var $$ = Dom7;
+			// 初始化 App
+			var myApp = new Framework7({
+			cache: false;
+				//precompileTemplates: true
+			}
+									  );
+			var mainView = myApp.addView('.view-main');
+			
+			var mySwiper1 = myApp.swiper('.swiper-1', {
+        pagination:'.swiper-1 .swiper-pagination',
+        spaceBetween: 50
+      });
+			// Now we may render our compiled template by passing required context
+			var context = {
+				people : [
+					{
+						firstName: 'John',
+						lastName: 'Doe'
+					}
+					,
+					{
+						firstName: 'Mark',
+						lastName: 'Johnson'
+					}
+					,
+				]
+			}
+			;
+			mainView.router.load({
+				template: Template7.templates.homeTemplate,
+				context: context
+			}
+								)
+		</script>
+	</body>
+</html>

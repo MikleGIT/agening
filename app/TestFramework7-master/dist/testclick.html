@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>My App</title>
+    <link rel="stylesheet" href="//ku.shouce.ren/libs/fk7/1.4.2/css/framework7.ios.min.css">
+    <link rel="stylesheet" href="//ku.shouce.ren/libs/fk7/1.4.2/css/framework7.ios.colors.min.css">
+    
+  </head>
+  <body>
+    <div class="views">
+      <div class="view view-main">
+        <div class="pages navbar-fixed">
+          <div data-page="home" class="page">
+            <div class="navbar">
+              <div class="navbar-inner">
+                <div class="left"></div>
+                <div class="center sliding">Notifications</div>
+                <div class="right"></div>
+              </div>
+            </div>
+            <div class="page-content">
+              <div class="content-block">
+                <p><a href="#" class="button notification-default">默认通知</a></p>
+                <p><a href="#" class="button notification-full">包含所有元素</a></p>
+                <p><a href="#" class="button notification-custom">包含自定义图片</a></p>
+                <p><a href="#" class="button notification-callback">关闭时触发回调函数</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="//ku.shouce.ren/libs/fk7/1.4.2/js/framework7.min.js"></script>
+    <script>
+      var myApp = new Framework7();
+      var mainView = myApp.addView('.view-main');
+      
+      var $$ = Dom7;
+      
+      $$('.notification-default').on('click', function () {
+          myApp.addNotification({
+              title: 'Framework7',
+              message: '这是一个包含标题和消息内容的简单通知'
+          });
+      });
+      $$('.notification-full').on('click', function () {
+          myApp.addNotification({
+              title: 'Framework7',
+              subtitle: '通知子标题',
+              message: 'This is a simple notification message with custom icon and subtitle',
+              message: '这是一个包含自定义icon和子标题的通知',
+              media: '<i class="icon icon-f7"></i>'
+          });
+      });
+      $$('.notification-custom').on('click', function () {
+          myApp.addNotification({
+              title: '真是个酷炫狂拽的App',
+              subtitle: '来自土豆的消息',
+              message: '地瓜地瓜，土豆呼叫地瓜。在9点方向发现如花，BalaBalaBala',
+              media: '<img width="44" height="44" style="border-radius:100%" src="http://lorempixel.com/output/people-q-c-100-100-9.jpg">'
+          });
+      });
+      $$('.notification-callback').on('click', function () {
+          myApp.addNotification({
+              title: '真是个酷炫狂拽的App',
+              subtitle: '来自土豆的消息',
+              message: '地瓜地瓜，土豆呼叫地瓜。在9点方向发现如花，BalaBalaBala',
+              media: '<img width="44" height="44" style="border-radius:100%" src="http://lorempixel.com/output/people-q-c-100-100-9.jpg">',
+              onClose: function () {
+                  myApp.alert('通知被关闭了~');
+              }
+          });
+      });
+    </script>
+  </body>
+</html>

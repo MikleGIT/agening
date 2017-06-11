@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>My App</title>
+    <link rel="stylesheet" href="../css/framework7.ios.min.css">
+    <link rel="stylesheet" href="../css/framework7.ios.colors.min.css">
+    
+  </head>
+  <body>
+    <div class="views">
+      <div class="view view-main">
+        <div class="pages">
+		
+		<script id="homeTemplate" type="text/template7">
+		<div></div>
+          <div data-page="home" class="page navbar-fixed">
+            <div class="navbar">
+			
+              <div class="navbar-inner">
+			  
+                <div class="left"></div>
+                <div class="center">Multiple Swipers</div>
+                <div class="right"></div>
+              </div>
+            </div>
+            <div class="page-content">
+			
+              <div class="content-block-title">1 Slide Per View, 50px Between</div>
+			  
+			  
+					
+						
+			  
+              <div class="swiper-container swiper-1">
+			  
+                <div class="swiper-pagination"></div>
+				
+                <div class="swiper-wrapper">
+				<div class="swiper-slide"><span>Slide 2</span></div>
+                <div class="swiper-slide"><span>Slide 3</span></div>
+				<!--script id="homeTemplate" type="text/template7">
+				{{#each people}}
+									  <!--li>{{firstName}} {{lastName}}</l>
+					<div class="swiper-slide"><span>{{firstName}} {{lastName}}</span></div>
+				{{/each}}   
+				</script-->
+                  <!--div class="swiper-slide"><span>Slide 1</span></div>
+                  <div class="swiper-slide"><span>Slide 2</span></div>
+                  <div class="swiper-slide"><span>Slide 3</span></div>
+                  <div class="swiper-slide"><span>Slide 4</span></div>
+                  <div class="swiper-slide"><span>Slide 5</span></div>
+                  <div class="swiper-slide"><span>Slide 6</span></div>
+                  <div class="swiper-slide"><span>Slide 7</span></div>
+                  <div class="swiper-slide"><span>Slide 8</span></div>
+                  <div class="swiper-slide"><span>Slide 9</span></div>
+                  <div class="swiper-slide"><span>Slide 10</span></div-->
+                </div>
+				</div>
+				
+             </div>
+          </div>
+		  
+		  <ul>
+							{{#each people}}
+							<li>{{firstName}} {{lastName}}</li>
+							{{/each}}    
+						</ul>          
+						
+		</script>
+		  
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="../js/framework7.min.js"></script>
+    <style>
+      .swiper-slide {
+        background: #fff;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        line-height:120px;
+        text-align:center;
+      }
+      .swiper-slide span {
+        font-size:17px;
+      }
+      .swiper-container {
+        height: 120px;
+        margin: 0px 0 35px;
+      }
+    </style>
+    <script>
+      var myApp = new Framework7(
+	  //precompileTemplates: true
+	  ); 
+      
+      // 1 Slide Per View, 50px Between
+      var mySwiper1 = myApp.swiper('.swiper-1', {
+        pagination:'.swiper-1 .swiper-pagination',
+        spaceBetween: 50
+      });
+      
+	  var mainView = myApp.addView('.view-main', {
+  // Because we want to use dynamic navbar, we need to enable it for this view:
+  dynamicNavbar: true
+});
+     var context = {
+				  people : [
+					{
+					  firstName: 'John',
+					  lastName: 'Doe'
+					},
+					{
+					  firstName: 'Mark',
+					  lastName: 'Johnson'
+					},
+				  ]
+				}    ;
+			mainView.router.load({
+				template: Template7.templates.homeTemplate,
+				context: context
+			})
+      
+    </script>
+	<!--script type="text/javascript" src="js/my-app.js"></script-->
+  </body>
+</html>
