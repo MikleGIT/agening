@@ -2,7 +2,7 @@
 
 class ApiController extends BaseController {
 
-    public function healthCategory() {
+    public function healthCareCategory() {
         $category = [];
         foreach( Category::findBySlug('service/healthcare')->subCategories()  as  $post ) {
             $slug = $post->getSlug();
@@ -58,6 +58,24 @@ class ApiController extends BaseController {
         return $data;
     }
 
+    public function discountCategory()
+    {
+        $data = [];
+        foreach (Category::findBySlug('discount')->subCategories() as $i=>$subcategory) {
+            $a = $subcategory->translate()->name;
+
+            foreach ($subcategory->subCategories() as $k=>$subsubcategory){
+                $slug = $subsubcategory->getSlug();
+                $str = $slug;
+                $str = preg_replace('/.*\//','',$str);
+                $data[$a][$k] = [
+                    'name'=>$subsubcategory->translate()->name,
+                    'slug'=>$str
+                ];
+            }
+        }
+        return $data;
+    }
     public function discountDetail($id)
     {
         $data =[];
@@ -91,6 +109,22 @@ class ApiController extends BaseController {
         return $data;
     }
 
+    public function discountSlug($slug)
+    {
+        $data = [];
+        foreach( Category::findBySlug('discount/'.$slug)->getPosts()  as  $post ) {
+            $id = $post->getSlug();
+            $str = $id;
+            $str = preg_replace('/.*\//','',$str);
+            $str = str_replace(array("_","post"),"",$str);
+            $data[]= [
+                'id'=>$str,
+                'organization'=>$post->getMetaValue('organization', App::getLocale()),
+                'title'=>$post->translate()->title,
+            ];
+        }
+        return $data;
+    }
     public function education()
     {
         $data = [];
@@ -229,6 +263,147 @@ class ApiController extends BaseController {
             'content'=>$post->translate()->content?$post->translate()->content:null
             ];
         return $data;
+
+    }
+
+    public function newsCategory()
+    {
+        $category = [];
+        foreach( Category::findBySlug('news')->subCategories()  as  $post ) {
+            $slug = $post->getSlug();
+            $str = $slug;
+            $str = preg_replace('/.*\//','',$str);
+            $category[]=[
+                'name'=>$post->translate()->name,
+                'slug'=>$str
+            ];
+        }
+        return $category;
+    }
+
+    public function newsSlug($slug)
+    {
+        $data = [];
+        foreach( Category::findBySlug('news/'.$slug)->getPosts()  as  $post ) {
+            $imageUrl = $post->getImageUrl()?$post->getImageUrl():null;
+            $id = $post->getSlug();
+            $str = $id;
+            $str = preg_replace('/.*\//','',$str);
+            $str = str_replace(array("_","post"),"",$str);
+            $data[]= [
+                'id'=>$str,
+                'title'=>$post->translate()->title,
+                'imageUrl'=>$imageUrl,
+                'excerpt'=>$post->translate()->getExcerpt()
+            ];
+        }
+        return $data;
+    }
+
+    public function newsDetail($id)
+    {
+        $data = [];
+        $post  = Post::find($id);
+        $data[]= [
+            'title'=>$post->translate()->title,
+            'createdAt'=>$post->getTranslatedCreatedAt(),
+            'imageUrl'=>$post->getImageUrl()?$post->getImageUrl():null,
+            'content'=>$post->translate()->content
+        ];
+        return $data;
+    }
+
+
+    public function healthCategory()
+    {
+        $category = [];
+        foreach( Category::findBySlug('health')->subCategories()  as  $post ) {
+            $slug = $post->getSlug();
+            $str = $slug;
+            $str = preg_replace('/.*\//','',$str);
+            $category[]=[
+                'name'=>$post->translate()->name,
+                'slug'=>$str
+            ];
+        }
+        return $category;
+    }
+
+    public function healthSlug($slug)
+    {
+        $data = [];
+        if($slug=='news'){
+            foreach( Category::findBySlug('health/'.$slug)->getPosts()  as  $post ) {
+                $id = $post->getSlug();
+                $str = $id;
+                $str = preg_replace('/.*\//','',$str);
+                $str = str_replace(array("_","post"),"",$str);
+                $data[]= [
+                    'id'=>$str,
+                    'slug'=>$post->getSlug(),
+                    'excerpt'=>$post->translate()->getExcerpt(),
+                    'title'=>$post->translate()->title,
+                ];
+            }
+            return $data;
+        }
+
+        elseif ($slug=='disease'){
+            if(count( Category::findBySlug('health/'.$slug)->subCategories() )){
+                foreach( Category::findBySlug(Category::findBySlug('health/'.$slug)->getFilteredSlug())->subCategories() as $posts_cat ){
+                    $a =  $posts_cat->translate()->name;
+                    foreach( Category::findBySlug('health/'.$slug)->getPosts()  as $i=> $post ) {
+                        $data[$a][$i]= [
+                            'slug'=>$post->getSlug(),
+                            'excerpt'=>$post->translate()->getExcerpt(),
+                            'title'=>$post->translate()->title,
+                        ];
+                    }
+                }
+            }
+            return $data;
+        }
+        elseif($slug=='info'){
+            $data[]=[
+                'title'=>Category::findBySlug('health/'.$slug)->getPage()->translate()->title,
+                'content'=>Category::findBySlug('health/'.$slug)->getPage()->translate()->content
+            ];
+            return $data;
+        }
+        elseif($slug=='tips'){
+            $data [] =[
+                'title'=>'保健貼士',
+                'content'=>[
+                    [
+                        'name'=>'保健短片',
+                        'slug'=>'video'
+                    ],
+                    [
+                        'name'=>'保健宣傳刊物',
+                        'slug'=>'publication'
+                    ],
+                    [
+                        'name'=>'衛生教育資源',
+                        'slug'=>'resources'
+                    ],
+                    [
+                        'name'=>'相關連結',
+                        'slug'=>'links'
+                    ],
+                ]
+            ];
+            return $data;
+        }elseif ($slug=='video'||'publication'||'resources'||'links'){
+            $data[]=[
+                'title'=>Category::findBySlug('health/'.$slug)->getPage()->translate()->title,
+                'content'=>Category::findBySlug('health/'.$slug)->getPage()->translate()->content
+            ];
+            return $data;
+//            return Category::findBySlug('health/'.$slug)->getPage()->translate();
+        }
+        else {
+            return 2222;
+        }
 
     }
 }
