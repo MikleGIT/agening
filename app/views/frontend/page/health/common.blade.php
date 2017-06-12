@@ -5,6 +5,7 @@
 @stop
 
 @section('rightcontent')
+
 <h2 class="access">你現在網站里的位置</h2>
 <div class="breadcrumb">
     <a href="{{ URL::to($frontend_current_category->getRootCategory()->getSlug()) }}">
@@ -22,7 +23,7 @@
 <div class="page-header">
         @if( count( $frontend_current_category->subCategories() ) )
         <h2>{{ $frontend_current_category->translate()->name }}</h2>
-        
+
         <ul class="list-inline">
             @foreach( Category::findBySlug($frontend_current_category->getFilteredSlug())->subCategories() as $posts_cat )
             @if($posts_cat->translate()->name != '')
@@ -43,7 +44,7 @@
         @else
             @if( !is_null($frontend_current_category->getParentCategory()->getParentCategory()) )
             <h2>{{ $frontend_current_category->getParentCategory()->translate()->name }}</h2>
-            
+
             <ul class="list-inline">
                 @foreach( Category::findBySlug($frontend_current_category->getParentCategory()->getFilteredSlug())->subCategories() as $posts_cat )
                 <li>

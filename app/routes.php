@@ -81,6 +81,12 @@ Route::get('/search', 'HomeController@search');
 Route::get('/search_google', 'HomeController@searchGoogle');
 
 Route::get('/api/carousel', 'HomeController@carousel');
+//例子：如果返回slug为service/healthcare/care，传care到/api/service/healthcare/{slug}
+Route::get('/api/health_care/category', 'ApiController@healthCategory');
+Route::get('/api/service/healthcare', 'ApiController@healthCare');
+Route::get('/api/service/healthcare/{slug}', 'ApiController@healthCareSlug');
+Route::get('/api/discount', 'ApiController@discount');
+
 // Route::get('/create_acc', function() {
 // 	DB::table('users')->truncate();
 

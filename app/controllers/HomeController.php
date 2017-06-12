@@ -113,7 +113,11 @@ class HomeController extends BaseController {
 	}
 	
 	public function test() {
-		return Response::json(Category::findBySlug('news')->getPosts());
+		$t = [];
+		foreach( Category::findBySlug('education')->getPosts() as $news_i => $post ) {
+			$t['id'.$news_i]= $post->translate()->title;
+		}
+		return $t;
 	}
 	
 	public function carousel() {

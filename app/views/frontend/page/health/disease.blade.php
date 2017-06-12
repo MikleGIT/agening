@@ -25,11 +25,17 @@
         @foreach( Category::findBySlug('health')->subCategories() as $posts_cat )
         <li>
              @if (URL::to($posts_cat->getSlug()) == 'http://www.ageing.ias.gov.mo/health/tips')
-                                        	<a href="http://www.ageing.ias.gov.mo/health/video"{{ (isset($frontend_current_category_id) && $frontend_current_category_id == $posts_cat->id) ? ' class="active"' : '' }}>
+                                        	<a href="http://www.ageing.ias.gov.mo/health/video"
+                                                    {{ (isset($frontend_current_category_id) &&
+                                                    $frontend_current_category_id == $posts_cat->id) ?
+                                                    ' class="active"' : '' }}>
                                                 {{ $posts_cat->translate()->name }}
                                             </a>
                                         @else
-                                            <a href="{{ URL::to($posts_cat->getSlug()) }}"{{ (isset($frontend_current_category_id) && $frontend_current_category_id == $posts_cat->id) ? ' class="active"' : '' }}>
+                                            <a href="{{ URL::to($posts_cat->getSlug()) }}"
+                                                    {{ (isset($frontend_current_category_id)
+                                                    && $frontend_current_category_id ==
+                                                    $posts_cat->id) ? ' class="active"' : '' }}>
                 {{ $posts_cat->translate()->name }}
             </a>
                                         @endif
@@ -57,7 +63,7 @@
                     </a>
                 </h4>
             </div>
-			
+
             <div id="collapse-{{ $posts_cat->id }}" class="panel-collapse collapse<?php /*{{ ($cat_index == 0) ? ' in' : '' }}*/ ?>" role="tabpanel" aria-labelledby="{{ $posts_cat->translate()->name }}">
                 <div class="panel-body">
                     <ul class="nav nav-tabs" role="tablist">
@@ -84,7 +90,7 @@
         @endforeach
 
     </div>
-    
+
 
     <a class="to-top" href="#hometop">
         <span class="glyphicon glyphicon-chevron-up"></span>
