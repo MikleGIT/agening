@@ -81,13 +81,17 @@ Route::get('/search', 'HomeController@search');
 Route::get('/search_google', 'HomeController@searchGoogle');
 
 Route::get('/api/carousel', 'HomeController@carousel');
-//例子：如果返回slug为service/healthcare/care，传care到/api/service/healthcare/{slug}
+//例子：如果返回slug为care，传care到/api/service/healthcare/{slug}
 Route::get('/api/health_care/category', 'ApiController@healthCategory');
 Route::get('/api/service/healthcare', 'ApiController@healthCare');
-Route::get('/api/service/healthcare/{slug}', 'ApiController@healthCareSlug');
+Route::get('/api/service/healthcare/{slug}', 'ApiController@healthCareDetail');
 Route::get('/api/discount', 'ApiController@discount');
 //{id}中的值为/api/discount返回的id的值
-Route::get('/api/discount/{id}', 'ApiController@enn');
+Route::get('/api/discount/{id}', 'ApiController@discountDetail');
+Route::get('/api/education', 'ApiController@education');
+Route::get('/api/education/category', 'ApiController@educationCategory');
+Route::get('/api/education/{id}', 'ApiController@educationDetail');
+
 
 // Route::get('/create_acc', function() {
 // 	DB::table('users')->truncate();
