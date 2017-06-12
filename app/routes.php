@@ -86,6 +86,8 @@ Route::get('/api/health_care/category', 'ApiController@healthCategory');
 Route::get('/api/service/healthcare', 'ApiController@healthCare');
 Route::get('/api/service/healthcare/{slug}', 'ApiController@healthCareSlug');
 Route::get('/api/discount', 'ApiController@discount');
+//{id}中的值为/api/discount返回的id的值
+Route::get('/api/discount/{id}', 'ApiController@enn');
 
 // Route::get('/create_acc', function() {
 // 	DB::table('users')->truncate();
