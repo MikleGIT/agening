@@ -116,9 +116,12 @@ class ApiController extends BaseController {
     public function educationCategory() {
         $category = [];
         foreach( Category::findBySlug('education/courses')->subCategories()  as  $post ) {
+            $slug = $post->getSlug();
+            $str = $slug;
+            $str = preg_replace('/.*\//','',$str);
             $category[]=[
                 'name'=>$post->translate()->name,
-                'slug'=>$post->getSlug()
+                'slug'=>$str
             ];
         }
         return $category;
@@ -145,8 +148,87 @@ class ApiController extends BaseController {
             'contact'=>$post->getMetaValue('contact')?$post->getMetaValue('contact'):null,
             'remark'=>$post->getMetaValue('remark') ? $post->getMetaValue('remark') : null,
             'content'=>$post->translate()->content ? $post->translate()->content : null
-//            apply contact  remark ->translate()->content
         ];
         return $data;
+    }
+
+
+    public function eventCategory()
+    {
+        $category = [
+            //slug取值：art,health,finance,relationships,other
+//            文化藝術  運動養生  退休理財  人際關係  其他
+            [
+                'name'=>'文化藝術',
+                'slug'=>'art'
+            ],
+            [
+                'name'=>'運動養生',
+                'slug'=>'health'
+            ],
+            [
+                'name'=>'退休理財',
+                'slug'=>'finance'
+            ],
+            [
+                'name'=>'人際關係',
+                'slug'=>'relationships'
+            ],
+            [
+                'name'=>'其他',
+                'slug'=>'other'
+            ]
+        ];
+
+//        foreach( Category::findBySlug('education/courses')->subCategories()  as  $post ) {
+//            $slug = $post->getSlug();
+//            $str = $slug;
+//            $str = preg_replace('/.*\//','',$str);
+//            $category[]=[
+//                'name'=>$post->translate()->name,
+//                'slug'=>$str
+//            ];
+//        }
+        return $category;
+    }
+    public function event($slug)
+    {
+        $data = [];
+        foreach( Category::findBySlug('event/'.$slug)->getPosts()  as  $post ) {
+            $id = $post->getSlug();
+            $str = $id;
+            $str = preg_replace('/.*\//','',$str);
+            $str = str_replace(array("_","post"),"",$str);
+            $data[]= [
+                'id'=>$str,
+                'title'=>$post->translate()->title,
+                'place'=>$post->getMetaValue('place'),
+                'date'=>$post->getMetaValue('date'),
+                'quota'=>$post->getMetaValue('quota'),
+                'contact'=>$post->getMetaValue('contact'),
+            ];
+        }
+        return $data;
+    }
+
+    public function eventDetail($id)
+    {
+
+        $data = [];
+        $post  = Post::find($id);
+        $data[]= [
+            'title'=>$post->translate()->title,
+            'createdAt'=>$post->getTranslatedCreatedAt(),
+            'date'=>$post->getMetaValue('date')?$post->getMetaValue('date'):null,
+            'place'=>$post->getMetaValue('place')?$post->getMetaValue('place'):null,
+            'performer'=>$post->getMetaValue('performer')?$post->getMetaValue('performer'):null,
+            'organization'=>$post->getMetaValue('organization')?$post->getMetaValue('organization'):null,
+            'fee'=>$post->getMetaValue('fee')?$post->getMetaValue('fee'):null,
+            'contact'=>$post->getMetaValue('contact')?$post->getMetaValue('contact'):null,
+            'remark'=>$post->getMetaValue('remark')?$post->getMetaValue('remark'):null,
+            'content'=>$post->translate()->content?$post->translate()->content:null
+            ];
+        return $data;
+
     }
 }
