@@ -33,7 +33,7 @@
         <h4>{{ trans('messages.next-news') }}</h4>
         <div class="row">
 
-            @foreach( $frontend_current_category->getPostsExcepta($frontend_current_post_id) as $more_news )
+            @foreach( $frontend_current_category->getPostsExcept($frontend_current_post_id) as $more_news )
             <div class="col-sm-6">
                 <div class="post">
                         <p class="date">{{ $more_news->getTranslatedCreatedAt() }}</p>
@@ -50,7 +50,7 @@
             </div>
             @endforeach
             
-            @foreach( $frontend_current_category->getPostsExceptb($frontend_current_post_id) as $more_news )
+            @foreach( $frontend_current_category->getPostsExcept($frontend_current_post_id) as $more_news )
             <div class="col-sm-6">
                 <div class="post">
                         <p class="date">{{ $more_news->getTranslatedCreatedAt() }}</p>
