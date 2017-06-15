@@ -1,6 +1,6 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+//header("Access-Control-Allow-Origin: *");
+//header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -111,6 +111,7 @@ Route::get('/api/news/detail/{id}', 'ApiController@newsDetail');
 Route::get('/api/health/category', 'ApiController@healthCategory');
 Route::get('/api/health/{slug}', 'ApiController@healthSlug');
 
+Route::get('/api/search/{keyword}','HomeController@searchApi');
 
 // Route::get('/create_acc', function() {
 // 	DB::table('users')->truncate();

@@ -150,4 +150,51 @@ class HomeController extends BaseController {
 		}
 		return Response::json($carousel);
 	}
+
+    public function searchApi($keyword)
+    {
+        $keyword = trim($keyword);
+
+        if( $keyword != '' )
+        {
+            $lang_id = Language::getIdByCode(App::getLocale());
+
+            if( App::getLocale() == 'gb' ) {
+                $lang_id = Language::getIdByCode('cn');
+                $keyword = Blupurple\Cn2Gb\Cn2Gb::trans($keyword, true);
+            }
+
+            $results = PageI18n::where(function($query) use ($keyword) {
+                $query->where('title', 'LIKE', '%' . $keyword . '%')
+                    ->orWhere('content', 'LIKE', '%' . $keyword . '%');
+            }
+            )->where('language_id', '=', $lang_id)
+                ->get();
+
+            foreach( $results as $i => $result ) {
+                $results[$i]['title'] = $this->highlight(strip_tags($result->title), $keyword);
+                $results[$i]['highlight'] = $this->highlight(strip_tags($result->content), $keyword);
+
+                if( App::getLocale() == 'gb' ) {
+                    $keyword = Blupurple\Cn2Gb\Cn2Gb::trans($keyword);
+                    $results[$i]['title'] = Blupurple\Cn2Gb\Cn2Gb::trans($results[$i]['title']);
+                    $results[$i]['highlight'] = Blupurple\Cn2Gb\Cn2Gb::trans($results[$i]['highlight']);
+                }
+            }
+
+        }
+        else{
+            $results = array();
+        }
+
+        $data = [];
+        foreach( $results as $result ){
+            $data[]=['title'=>$result->title,'keyword'=>$keyword,'content'=>$result->content];
+        }
+//                <a href="{{ route('go.to.slug', array(Category::find( Page::find($result->page_id)->category_id )->slug)) }}">
+//                    {{ $result->title }}
+//                {{ $result->highlight }}
+        return $data;
+//        return View::make('frontend.home.search')->with('results', $results)->with('keyword', $keyword);
+    }
 }
