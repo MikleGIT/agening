@@ -99,6 +99,7 @@ Route::group(array('prefix' => 'api'), function()
 
     Route::get('education', 'ApiController@education');
     Route::get('education/category', 'ApiController@educationCategory');
+    Route::get('education/category/{slug}', 'ApiController@educationSlug');
     Route::get('education/{id}', 'ApiController@educationDetail');
 
     Route::get('event/category', 'ApiController@eventCategory');

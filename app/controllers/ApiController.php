@@ -149,18 +149,44 @@ class ApiController extends BaseController {
     }
     public function educationCategory() {
         $category = [];
-        foreach( Category::findBySlug('education/courses')->subCategories()  as  $post ) {
-            $slug = $post->getSlug();
-            $str = $slug;
-            $str = preg_replace('/.*\//','',$str);
-            $category[]=[
-                'name'=>$post->translate()->name,
-                'slug'=>$str
-            ];
-        }
+//        foreach( Category::findBySlug('education/courses')->subCategories()  as  $post ) {
+//            $slug = $post->getSlug();
+//            $str = $slug;
+//            $str = preg_replace('/.*\//','',$str);
+//            $category[]=[
+//                'name'=>$post->translate()->name,
+//                'slug'=>$str
+//            ];
+//        }
+        $category[]=[
+            [
+                'name'=>'課程資訊',
+                'slug'=>'courses'
+            ],
+            [
+                'name'=>'學習小貼士',
+                'slug'=>'tips'
+            ],
+            [
+                'name'=>'通訊錄',
+                'slug'=>'edcontact'
+            ],
+            [
+                'name'=>'終身學習雜誌',
+                'slug'=>'learningmag'
+            ],
+        ];
         return $category;
     }
 
+    public function educationSlug($slug)
+    {
+        $data = [];
+        $data[] = [ 'title'=>Category::findBySlug('education/'.$slug)->getPage()->translate()->title,
+            'content'=>Category::findBySlug('education/'.$slug)->getPage()->translate()->content];
+        return $data;
+
+    }
     public function educationDetail($id)
     {
         $data = [];
