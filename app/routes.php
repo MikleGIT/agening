@@ -81,37 +81,43 @@ Route::get('/set_lang/{lang_code}', 'LanguageController@setLang');
 Route::get('/search', 'HomeController@search');
 Route::get('/search_google', 'HomeController@searchGoogle');
 
-//将返回的slug传入下一个id /api/news/detail/{id}
-Route::get('/api/carousel', 'HomeController@carousel');
+Route::group(array('prefix' => 'api'), function()
+{
+
+    //将返回的slug传入下一个id /api/news/detail/{id}
+    Route::get('carousel', 'HomeController@carousel');
 //例子：如果返回slug为care，传care到/api/service/healthcare/{slug}
-Route::get('/api/health_care/category', 'ApiController@healthCareCategory');
-Route::get('/api/service/healthcare', 'ApiController@healthCare');
-Route::get('/api/service/healthcare/{slug}', 'ApiController@healthCareDetail');
+    Route::get('health_care/category', 'ApiController@healthCareCategory');
+    Route::get('service/healthcare', 'ApiController@healthCare');
+    Route::get('service/healthcare/{slug}', 'ApiController@healthCareDetail');
 
-Route::get('/api/discount', 'ApiController@discount');
-Route::get('/api/discount/category', 'ApiController@discountCategory');
-Route::get('/api/discount/{slug}', 'ApiController@discountSlug');
+    Route::get('discount', 'ApiController@discount');
+    Route::get('discount/category', 'ApiController@discountCategory');
+    Route::get('discount/{slug}', 'ApiController@discountSlug');
 //{id}中的值为/api/discount返回的id的值
-Route::get('/api/discount/detail/{id}', 'ApiController@discountDetail');
+    Route::get('discount/detail/{id}', 'ApiController@discountDetail');
 
-Route::get('/api/education', 'ApiController@education');
-Route::get('/api/education/category', 'ApiController@educationCategory');
-Route::get('/api/education/{id}', 'ApiController@educationDetail');
+    Route::get('education', 'ApiController@education');
+    Route::get('education/category', 'ApiController@educationCategory');
+    Route::get('education/{id}', 'ApiController@educationDetail');
 
-Route::get('/api/event/category', 'ApiController@eventCategory');
+    Route::get('event/category', 'ApiController@eventCategory');
 //slug取值：art,health,finance,relationships,other
-Route::get('/api/event/{slug}', 'ApiController@event');
-Route::get('/api/event/detail/{id}', 'ApiController@eventDetail');
+    Route::get('event/{slug}', 'ApiController@event');
+    Route::get('event/detail/{id}', 'ApiController@eventDetail');
 
-Route::get('/api/news/category', 'ApiController@newsCategory');
-Route::get('/api/news/{slug}', 'ApiController@newsSlug');
-Route::get('/api/news/detail/{id}', 'ApiController@newsDetail');
+    Route::get('news/category', 'ApiController@newsCategory');
+    Route::get('news/{slug}', 'ApiController@newsSlug');
+    Route::get('news/detail/{id}', 'ApiController@newsDetail');
 
 //health应该就是其他新闻了
-Route::get('/api/health/category', 'ApiController@healthCategory');
-Route::get('/api/health/{slug}', 'ApiController@healthSlug');
+    Route::get('health/category', 'ApiController@healthCategory');
+    Route::get('health/{slug}', 'ApiController@healthSlug');
 
-Route::get('/api/search/{keyword}','HomeController@searchApi');
+    Route::get('search/{keyword}','HomeController@searchApi');
+
+});
+
 
 // Route::get('/create_acc', function() {
 // 	DB::table('users')->truncate();
