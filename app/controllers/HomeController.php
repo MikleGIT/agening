@@ -134,7 +134,13 @@ class HomeController extends BaseController {
 			} else {
 				$content =$post->translate()->getExcerpt(36);
 			}
-			$carousel[] = ['id' => $news_i ,
+            $id = $post->getSlug();
+            $str = $id;
+            $str = preg_replace('/.*\//','',$str);
+            $str = str_replace(array("_","post"),"",$str);
+            $carousel[] = [
+			    'id' => $news_i ,
+                'slug'=>$str,
 						'title'=>$post->translate()->title,
 						'imgUrl'=>$imgUrl,
 						'content'=>$content,

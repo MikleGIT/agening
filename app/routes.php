@@ -80,6 +80,7 @@ Route::get('/set_lang/{lang_code}', 'LanguageController@setLang');
 Route::get('/search', 'HomeController@search');
 Route::get('/search_google', 'HomeController@searchGoogle');
 
+//将返回的slug传入下一个id /api/news/detail/{id}
 Route::get('/api/carousel', 'HomeController@carousel');
 //例子：如果返回slug为care，传care到/api/service/healthcare/{slug}
 Route::get('/api/health_care/category', 'ApiController@healthCareCategory');
